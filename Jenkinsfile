@@ -64,12 +64,12 @@ pipeline {
         
 
         stage('build and Tag docker image') {
-            steps {
-                script {
-                        sh "docker build -t Vivek7296/ekart:latest -f docker/Dockerfile ."
-                    }
-            }
+    steps {
+        script {
+            sh "docker build -t vivek7296/ekart:latest -f docker/Dockerfile ."
         }
+    }
+}
 
         stage('Push image to Hub'){
             steps{
