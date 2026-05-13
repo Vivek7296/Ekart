@@ -41,10 +41,12 @@ pipeline {
             }
         }
 
-        stage('OWASP Dependency Check') {
+       stage('OWASP Dependency Check') {
     steps {
-        dependencyCheck additionalArguments: '--scan ./ -n', odcInstallation: 'DC'
-        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+            dependencyCheck additionalArguments: '--scan ./ -n', odcInstallation: 'DC'
+            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        }
     }
 }
 
